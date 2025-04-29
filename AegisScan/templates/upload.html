@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            {% with messages = get_flashed_messages(with_categories=true) %}
+                {% if messages %}
+                    {% for category, message in messages %}
+                        <div class="alert alert-{{ category }} alert-dismissible fade show" role="alert">
+                            {{ message }}
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+                    {% endfor %}
+                {% endif %}
+            {% endwith %}
+
+            <div class="card bg-dark text-light shadow animate__animated animate__fadeIn">
+                <div class="card-body">
+                    <h3 class="card-title text-center mb-4">📂 Upload ZIP File to Scan</h3>
+
+                    <form method="POST" action="{{ url_for('upload') }}" enctype="multipart/form-data">
+                        <div class="mb-3">
+                            <label for="zip_file" class="form-label">Choose a .zip file:</label>
+                            <input class="form-control bg-dark text-light border-secondary" type="file" name="zip_file" id="zip_file" required>
+                        </div>
+
+                        <div class="d-grid gap-2 mt-4">
+                            <button type="submit" class="btn btn-primary">🔍 Scan Now</button>
+                            <a href="{{ url_for('paste_scan') }}" class="btn btn-outline-light">📝 Paste Code Instead</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+{% endblock %}

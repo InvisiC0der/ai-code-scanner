@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container text-center px-3 py-5" style="max-width: 700px;">
+    <div class="card bg-dark text-light shadow-lg animate__animated animate__fadeIn">
+        <div class="card-body p-5">
+            <h2 class="card-title mb-3">👋 Welcome to <span class="text-info">AegisScan</span></h2>
+            <p class="lead">Shield your code with <strong>AegisScan</strong> 🛡️<br>Choose how you'd like to scan:</p>
+
+            <div class="d-grid gap-4 mt-5">
+                <a href="{{ url_for('upload') }}" class="btn btn-success btn-lg animate__animated animate__pulse animate__infinite">📦 Upload ZIP & Scan</a>
+                <a href="{{ url_for('paste_scan') }}" class="btn btn-warning btn-lg">📝 Paste Code & Scan</a>
+            </div>
+
+            <hr class="border-secondary my-4">
+
+            <p class="text-muted">No login required. Your code stays local & secure.</p>
+        </div>
+    </div>
+</div>
+{% endblock %}

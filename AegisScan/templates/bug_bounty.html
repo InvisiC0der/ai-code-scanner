@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container mt-5 text-light">
+    <div class="card bg-dark shadow-lg">
+        <div class="card-body p-5">
+
+            <h2 class="text-warning">💰 Bug Bounty Report Summary</h2>
+            <hr>
+            <p><strong>🔐 High Risk Issues:</strong> <span class="badge bg-danger">{{ high }}</span></p>
+            <p><strong>🟠 Medium Risk Issues:</strong> <span class="badge bg-warning text-dark">{{ medium }}</span></p>
+            <p><strong>🟢 Low Risk Issues:</strong> <span class="badge bg-success">{{ low }}</span></p>
+            <p><strong>🧮 Security Score:</strong> <span class="badge bg-info">{{ score }} / 100</span></p>
+            <p><strong>🏆 Bounty Earned:</strong> <span class="badge bg-success fs-5">{{ reward }}</span></p>
+
+            <hr>
+            <h4 class="text-info mt-4 mb-3">🔍 Detailed Vulnerability Breakdown</h4>
+
+            {% if issues %}
+                {% for issue in issues %}
+                    <div class="card mb-4 {% if issue.severity.lower() == 'high' %}border-danger{% elif issue.severity.lower() == 'medium' %}border-warning{% else %}border-success{% endif %}">
+                        <div class="card-header bg-secondary text-white">
+                            <strong>📄 {{ issue.file }}</strong> — Line {{ issue.line_number }}
+                            <span class="badge {% if issue.severity.lower() == 'high' %}bg-danger{% elif issue.severity.lower() == 'medium' %}bg-warning text-dark{% else %}bg-success{% endif %} float-end">
+                                {{ issue.severity }}
+                            </span>
+                        </div>
+                        <div class="card-body bg-light text-dark">
+                            <p><strong>🚩 Risk Category:</strong> {{ issue.category }}</p>
+                            <p><strong>💻 Code:</strong></p>
+                            <pre class="bg-dark text-white p-3 rounded"><code>{{ issue.code | safe }}</code></pre>
+                            <p><strong>🧠 Why it's risky:</strong> {{ issue.why }}</p>
+                            <p><strong>🔧 Suggested Fix:</strong> {{ issue.fix }}</p>
+                        </div>
+                    </div>
+                {% endfor %}
+            {% else %}
+                <p class="text-success">✅ No vulnerabilities found. Great job!</p>
+            {% endif %}
+
+            <hr>
+            <div class="text-center mt-4">
+                <a href="/" class="btn btn-outline-light">🔙 Back to Dashboard</a>
+                <a href="/report" class="btn btn-outline-info">📄 View Report</a>
+            </div>
+
+        </div>
+    </div>
+</div>
+{% endblock %}
