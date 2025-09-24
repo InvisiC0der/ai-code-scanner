@@ -132,6 +132,6 @@ A: Yes. Files are only processed locally and not stored permanently.
 This project is open-source and free to use under the MIT License.
 
 👤 Author
-Made with ❤️ by Durga
+Made with  by Durga Prasath 
 
 
